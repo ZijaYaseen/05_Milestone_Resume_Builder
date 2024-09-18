@@ -204,12 +204,12 @@ body {
     }
 
     .header-image img {
-        width: 50vh;
+        width: 40vh;
         height: 60vh;
     }
 
     .button, .templateStartBtn {
-        font-size: 13px;
+        font-size: 15px;
         padding: 6px 12px;
         margin: 0;
         margin-bottom: 20px;
