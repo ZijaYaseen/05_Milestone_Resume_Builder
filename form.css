@@ -381,6 +381,26 @@ textarea[name="experienceDescription"] {
 }
 
 @media print {
+
+    @page {
+        size: A4 portrait; /* Set page size to A4 and orientation to portrait */
+    }
+
+    body {
+           /* Ensure background color is printed */
+        -webkit-print-color-adjust: exact; /* Chrome, Safari */
+        -moz-print-color-adjust: exact; /* Firefox */
+        print-color-adjust: exact; /* Standard */
+
+        page-break-inside: avoid; /* Avoid breaking inside this element */
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .left-section {
+        background-color: #f0f4f8; /* Aap jo color dena chahte hain */
+      }
+
     #downloadpdfBtn {
         display: none !important; /* Forcefully hide the button during print */
     }
