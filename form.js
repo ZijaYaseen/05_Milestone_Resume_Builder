@@ -10,6 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault(); // Prevent the default form submission behavior
         generateResume();
     });
+    // Hide the PDF button initially
+    const downloadpdfBtn = document.getElementById('downloadpdfBtn');
+    const shareLink = document.getElementById('shareLink');
+    downloadpdfBtn.addEventListener('click', () => {
+        window.print();
+    });
     // Adding education details
     function addEducation() {
         var _a;
@@ -130,5 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // show the generated resume in styled container.... with css 
         resumeSection.innerHTML = resumeContent;
         resumeSection.style.display = 'block';
+        // Show the PDF button and shareLink button only after the resume is generated
+        downloadpdfBtn.style.display = 'block';
+        shareLink.style.display = 'block';
     }
 });
