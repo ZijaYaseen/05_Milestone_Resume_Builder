@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     var _a, _b, _c, _d;
     const form = document.getElementById('resumeForm');
     const resumeSection = document.getElementById('resumeSection');
+    const downloadpdfBtn = document.getElementById('downloadpdfBtn');
+    const shareLink = document.getElementById('shareLink');
     (_a = document.getElementById('addEducationBtn')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => addEducation());
     (_b = document.getElementById('addSkillBtn')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', () => addSkill());
     (_c = document.getElementById('addExperienceBtn')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', () => addExperience());
@@ -10,9 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault(); // Prevent the default form submission behavior
         generateResume();
     });
-    // Hide the PDF button initially
-    const downloadpdfBtn = document.getElementById('downloadpdfBtn');
-    const shareLink = document.getElementById('shareLink');
+    //Event listner for download the page ...but i hide print button from user form.. and just show this button on generated resume.
     downloadpdfBtn.addEventListener('click', () => {
         window.print();
     });
@@ -139,5 +139,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show the PDF button and shareLink button only after the resume is generated
         downloadpdfBtn.style.display = 'block';
         shareLink.style.display = 'block';
+        // share link buttton functionality
+        shareLink.addEventListener('click', () => {
+            const currentUrl = window.location.origin;
+            const resumeUrl = `${currentUrl}/${encodeURIComponent(name).toLowerCase().trim()}/resume/`;
+            // User ko shareable URL dikhana or copy karwana
+            navigator.clipboard.writeText(resumeUrl).then(() => {
+                alert('Link copied to clipboard: ' + resumeUrl);
+            }).catch(() => {
+                alert('Failed to copy the link.');
+            });
+        });
     }
 });

@@ -150,9 +150,11 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadpdfBtn.style.display = 'block';
         shareLink.style.display = 'block'
 
+
+        // share link buttton functionality
         shareLink.addEventListener('click', () => {
-            const currentUrl = window.location.href;
-            const resumeUrl = `name=${encodeURIComponent(name).toLowerCase()}/resume/${currentUrl}?`;
+            const currentUrl = window.location.origin;
+            const resumeUrl = `${currentUrl}/${encodeURIComponent(name).toLowerCase().trim()}/resume/`;
             
             // User ko shareable URL dikhana or copy karwana
             navigator.clipboard.writeText(resumeUrl).then(() => {
