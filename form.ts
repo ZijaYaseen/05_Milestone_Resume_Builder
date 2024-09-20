@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('resumeForm') as HTMLFormElement;
     const resumeSection = document.getElementById('resumeSection') as HTMLElement;
+    const downloadpdfBtn = document.getElementById('downloadpdfBtn') as HTMLButtonElement;
+    const shareLink = document.getElementById('shareLink') as HTMLButtonElement;
 
     document.getElementById('addEducationBtn')?.addEventListener('click', () => addEducation());
     document.getElementById('addSkillBtn')?.addEventListener('click', () => addSkill());
@@ -10,14 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
         generateResume();
     });
 
-
-       // Hide the PDF button initially
-       const downloadpdfBtn = document.getElementById('downloadpdfBtn') as HTMLButtonElement;
-       const shareLink = document.getElementById('shareLink') as HTMLButtonElement;
-
-       downloadpdfBtn.addEventListener('click', () => {
-           window.print();
-       });
+    //Event listner for download the page ...but i hide print button from user form.. and just show this button on generated resume.
+    downloadpdfBtn.addEventListener('click', () => {
+        window.print();
+    });
 
     // Adding education details
     function addEducation(): void {
@@ -148,8 +146,23 @@ document.addEventListener('DOMContentLoaded', () => {
         resumeSection.innerHTML = resumeContent;
         resumeSection.style.display = 'block';
 
-                // Show the PDF button and shareLink button only after the resume is generated
-                downloadpdfBtn.style.display = 'block';
-                shareLink.style.display = 'block'
+        // Show the PDF button and shareLink button only after the resume is generated
+        downloadpdfBtn.style.display = 'block';
+        shareLink.style.display = 'block'
+
+        shareLink.addEventListener('click', () => {
+            const currentUrl = window.location.href;
+            const resumeUrl = `name=${encodeURIComponent(name).toLowerCase()}/resume/${currentUrl}?`;
+            
+            // User ko shareable URL dikhana or copy karwana
+            navigator.clipboard.writeText(resumeUrl).then(() => {
+                alert('Link copied to clipboard: ' + resumeUrl);
+            }).catch(() => {
+                alert('Failed to copy the link.');
+            });
+        });
     }
+
+
+    
 });
